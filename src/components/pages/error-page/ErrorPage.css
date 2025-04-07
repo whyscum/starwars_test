@@ -1,0 +1,49 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: #17002F;
+    min-height: 100vh;
+}
+
+.error_page {
+    margin: 83px 0 120px 0;
+    width: fit-content;
+    position: relative;
+}
+
+.error__page--number {
+    font-family: 'Karla';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48.6vw;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    letter-spacing: 4px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.error__page--img {
+    width: 53.9%;
+    position: absolute;
+    top: 9%;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.error__page--button {
+    width: 16%;
+    height: 66px;
+    background: #73D677;
+    box-shadow: inset 0px -9px 0px rgba(0, 0, 0, 0.18);
+    border-radius: 11px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 23px;
+    line-height: 27px;
+    color: #212121;
+    margin: 0 0 83px 0;
+}
