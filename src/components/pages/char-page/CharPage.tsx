@@ -1,11 +1,12 @@
 import { useEffect, useState, useCallback, SetStateAction} from "react";
 import axios from "axios";
-import ErrorPage from "../error-page/ErrorPage.tsx";
 import CardList from "../../card-list/CardList.tsx";
 import {Character} from "../../../shared/types/character.ts";
 import {useTranslation} from "react-i18next";
 import CardPopup from "../../popup/CardPopup.tsx";
 import FilterCard from "../../filter/FilterCard.tsx";
+import {Navigate} from "react-router";
+import Loader from "../../loader/Loader.tsx";
 
 const CharPage = () => {
     const [characters, setCharacters] = useState<Character[]>([]);
@@ -16,6 +17,7 @@ const CharPage = () => {
     const [selectedCard, setSelectedCard] = useState<Character | undefined>(undefined);
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [selectedSort, setSelectedSort] = useState('')
+    const [dataCount, setDataCount] = useState(0)
 
     const {t, i18n} = useTranslation()
     const languages = ["en", "wookie"]
@@ -40,9 +42,7 @@ const CharPage = () => {
 
     const fetchCharacters = useCallback(async () => {
         if (!hasMore || loading) return;
-
         setLoading(true);
-
         try {
             const response = await axios.get(currentPageUrl);
             if (response.status >= 400) {
@@ -51,6 +51,7 @@ const CharPage = () => {
             }
 
             setCharacters(prev => [...prev, ...response?.data?.results ?? []])
+            setDataCount(response.data.count)
             setCurrentPageUrl(response.data.next);
 
             if (!response.data.next) {
@@ -60,7 +61,9 @@ const CharPage = () => {
         } catch {
             setError("Произошла ошибка при загрузке данных");
         } finally {
-            setLoading(false);
+            setTimeout(() => {
+                setLoading(false)
+            },500)
         }
     }, [currentPageUrl, hasMore, loading]);
 
@@ -74,7 +77,6 @@ const CharPage = () => {
                 fetchCharacters()
             }
         };
-
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, [characters, fetchCharacters]);
@@ -84,23 +86,29 @@ const CharPage = () => {
     }, []);
 
     if (error) {
-        return (<ErrorPage/>);
+        return <Navigate to="/*" replace />;
     }
     return (
-        <main>
-            <section className="characters">
-                <button onClick={switchLanguage}>{i18n.language.toUpperCase()}</button>
+        <section className="characters">
+            <div className="characters__header">
+                <p className="characters__language">language: {i18n.language}</p>
                 <h2 className="characters__title">
-                    {characters.length}
-                    <span className="characters__title-accent">{t("Peoples")}</span>
-                    {t("for you to choose your favorite")}
+                    {dataCount} <span className="characters__title-accent">{t("Peoples")}</span> {t("for you to choose your favorite")}
                 </h2>
-                <FilterCard onChange={(sort: SetStateAction<string>)=> setSelectedSort(sort)} />
-                <CardList characters={characters} onCardClick={handlePopupOpen} color={selectedSort}/>
-                {selectedCard && (<CardPopup card={selectedCard} isPopupOpen={isPopupOpen} onClose={handlePopupClose} />) }
-            </section>
-        </main>
-);
+            </div>
+
+            <button className="characters__lang-button" onClick={switchLanguage}></button>
+
+            {loading && <Loader />}
+
+            <FilterCard onChange={(sort: SetStateAction<string>) => setSelectedSort(sort)} />
+            <CardList characters={characters} onCardClick={handlePopupOpen} color={selectedSort} />
+
+            {selectedCard && (
+                <CardPopup card={selectedCard} isPopupOpen={isPopupOpen} onClose={handlePopupClose} />
+            )}
+        </section>
+    );
 };
 
 export default CharPage;
