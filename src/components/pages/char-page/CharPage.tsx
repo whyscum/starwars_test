@@ -61,9 +61,7 @@ const CharPage = () => {
         } catch {
             setError("Произошла ошибка при загрузке данных")
         } finally {
-            setTimeout(() => {
-                setLoading(false)
-            },500)
+            setLoading(false)
         }
     }, [currentPageUrl, hasMore, loading])
 
