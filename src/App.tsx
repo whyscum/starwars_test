@@ -7,15 +7,13 @@ import Layot from "./components/layot/Layot.tsx";
 function App() {
 
     return (
-        <>
-            <Routes>
-                <Route path='/' element={<Layot />}>
-                    <Route index element={<HomePage />} />
-                    <Route path='char' element={<CharPage />} />
-                </Route>
-                <Route path='*' element={<ErrorPage />} />
-            </Routes>
-        </>
+        <Routes>
+            <Route path='/' element={<Layot />}>
+                <Route index element={<HomePage />} />
+                <Route path='char' element={<CharPage />} />
+            </Route>
+            <Route path='*' element={<ErrorPage />} />
+        </Routes>
     );
 }
 

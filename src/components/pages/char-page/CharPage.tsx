@@ -14,7 +14,7 @@ const CharPage = () => {
     const [error, setError] = useState<string | null>(null);
     const [currentPageUrl, setCurrentPageUrl] = useState('https://swapi.dev/api/people/');
     const [hasMore, setHasMore] = useState(true);
-    const [selectedCard, setSelectedCard] = useState<Character | undefined>(undefined);
+    const [selectedCard, setSelectedCard] = useState<Character | null>(null);
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [selectedSort, setSelectedSort] = useState('')
     const [dataCount, setDataCount] = useState(0)
@@ -23,49 +23,49 @@ const CharPage = () => {
     const languages = ["en", "wookie"]
 
     const switchLanguage = () => {
-        const currentLang = i18n.language;
-        const currentIndex = languages.indexOf(currentLang);
-        const nextIndex = (currentIndex + 1) % languages.length;
-        const nextLang = languages[nextIndex];
-        i18n.changeLanguage(nextLang);
+        const currentLang = i18n.language
+        const currentIndex = languages.indexOf(currentLang)
+        const nextIndex = (currentIndex + 1) % languages.length
+        const nextLang = languages[nextIndex]
+        i18n.changeLanguage(nextLang)
     };
 
     const handlePopupOpen = (char: Character) => {
-        setIsPopupOpen(true);
-        setSelectedCard(char);
+        setIsPopupOpen(true)
+        setSelectedCard(char)
     }
 
     const handlePopupClose = () => {
-        setIsPopupOpen(false);
-        setSelectedCard(undefined);
+        setIsPopupOpen(false)
+        setSelectedCard(null)
     }
 
     const fetchCharacters = useCallback(async () => {
-        if (!hasMore || loading) return;
-        setLoading(true);
+        if (!hasMore || loading) return
+        setLoading(true)
         try {
             const response = await axios.get(currentPageUrl);
             if (response.status >= 400) {
                 setError("Ошибка при загрузке данных");
-                return;
+                return
             }
 
             setCharacters(prev => [...prev, ...response?.data?.results ?? []])
             setDataCount(response.data.count)
-            setCurrentPageUrl(response.data.next);
+            setCurrentPageUrl(response.data.next)
 
             if (!response.data.next) {
-                setHasMore(false);
+                setHasMore(false)
                 setCurrentPageUrl('')
             }
         } catch {
-            setError("Произошла ошибка при загрузке данных");
+            setError("Произошла ошибка при загрузке данных")
         } finally {
             setTimeout(() => {
                 setLoading(false)
             },500)
         }
-    }, [currentPageUrl, hasMore, loading]);
+    }, [currentPageUrl, hasMore, loading])
 
     useEffect(() => {
         const handleScroll = () => {
@@ -76,17 +76,17 @@ const CharPage = () => {
             ) {
                 fetchCharacters()
             }
-        };
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, [characters, fetchCharacters]);
+        }
+        window.addEventListener("scroll", handleScroll)
+        return () => window.removeEventListener("scroll", handleScroll)
+    }, [characters, fetchCharacters])
 
     useEffect(() => {
         fetchCharacters()
-    }, []);
+    }, [])
 
     if (error) {
-        return <Navigate to="/*" replace />;
+        return <Navigate to="/*" replace />
     }
     return (
         <section className="characters">
@@ -99,7 +99,7 @@ const CharPage = () => {
 
             <button className="characters__lang-button" onClick={switchLanguage}></button>
 
-            {loading && <Loader />}
+            <Loader isLoading={loading}/>
 
             <FilterCard onChange={(sort: SetStateAction<string>) => setSelectedSort(sort)} />
             <CardList characters={characters} onCardClick={handlePopupOpen} color={selectedSort} />

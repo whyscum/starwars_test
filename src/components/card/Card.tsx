@@ -6,21 +6,21 @@ const Card: FC<CardProps> = props => {
     const {char, onClick} = props
 
     const handleClick = () => {
-        onClick(char);
+        onClick(char)
     }
 
     function color() {
         if (char.gender === 'male') {
-            return "#73D677";
+            return "#73D677"
         }
         if (char.gender === 'female') {
-            return "#C956FF";
+            return "#C956FF"
         }
-        return "#F5DB13";
+        return "#F5DB13"
     }
 
     return (
-        <div className="card" onClick={handleClick}>
+        <div className="card" role="button" onClick={handleClick}>
             {CardUtil.isKnown(char.name) && <h3 className="card__title">{char.name}</h3>}
 
             <div className="card__info-container">

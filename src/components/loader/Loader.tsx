@@ -1,6 +1,24 @@
-import React from 'react';
+import {FC, useEffect, useState} from "react";
+import {ILoader} from "../../shared/types/loader.ts";
 
-const Loader = () => {
+const Loader:FC<ILoader> = ({ isLoading }) => {
+    const [debaunceIsLoading, setDebaunceIsLoading] = useState<boolean>(false);
+
+    useEffect(() => {
+        if(!isLoading) {
+            const interval = setInterval(() => {
+                setDebaunceIsLoading(false)
+            }, 700)
+
+            return () => clearInterval(interval)
+        }
+        setDebaunceIsLoading(isLoading)
+
+
+    }, [isLoading])
+
+    if(!debaunceIsLoading) return <></>
+
     return (
         <div className="droid">
             <div className="radios">

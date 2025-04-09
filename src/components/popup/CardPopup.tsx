@@ -10,26 +10,26 @@ const CardPopup: FC<CardPopupProps> = (props) => {
 
     function selectedImage() {
         if (card.gender === 'male') {
-            return male;
+            return male
         }
         if (card.gender === 'female') {
-            return female;
+            return female
         }
-        return alien;
+        return alien
     }
 
     function color() {
         if (card.gender === 'male') {
-            return "#73D677";
+            return "#73D677"
         }
         if (card.gender === 'female') {
-            return "#C956FF";
+            return "#C956FF"
         }
-        return "#F5DB13";
+        return "#F5DB13"
     }
 
     return (
-        <div className={`card-popup ${isPopupOpen ? 'card-popup_opened' : ''}`}>
+        <div className={`card-popup ${isPopupOpen ? 'card-popup__opened' : ''}`}>
             <div className="card-popup__container">
                 <button className="card-popup__close" onClick={onClose} type="button" aria-label="Close" />
                 <div className="card-popup__image-block">
@@ -48,13 +48,13 @@ const CardPopup: FC<CardPopupProps> = (props) => {
                     </ul>
                     <div className="card-popup__metrics">
                         {CardUtil.isKnown(card.height) && (
-                            <div className="card__info--item">
+                            <div className="card-popup__info--item">
                                 <div className="card__info-value">{card.height}</div>
                                 <span className="card__info-name">height</span>
                             </div>
                         )}
                         {CardUtil.isKnown(card.mass) && (
-                            <div className="card__info--item">
+                            <div className="card-popup__info--item">
                                 <div className="card__info-value">{card.mass}</div>
                                 <span className="card__info-name">mass</span>
                             </div>

@@ -7,8 +7,8 @@ const CardList: FC<CardListProps> = props => {
 
     const filterCards = () => {
         if (color.length === 0) {
-            return characters;
-        } return characters.filter((char) => color == char.eye_color);
+            return characters
+        } return characters.filter((char) => color == char.eye_color)
     }
 
     return (
