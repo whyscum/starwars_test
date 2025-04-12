@@ -5,4 +5,6 @@ export enum CharacterEyeColor {
     'blue' = 'blue',
     'white' = 'white',
     'gray' = 'blue-gray',
+    'yellow' = 'yellow',
+    'black' = 'black',
 }

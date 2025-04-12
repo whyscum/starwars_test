@@ -1,0 +1,35 @@
+.select {
+  position: relative;
+  margin: 0 0 20px 10%;
+  display: flex;
+
+  &__label {
+    font-size: 16px;
+    color: #212121;
+    display: flex;
+    gap: 10px;
+  }
+
+  &__menu {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 4px 40px 4px 5px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #f5f5f5;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    outline: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23333' stroke-width='2'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px;
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {
+      background-color: #eaeaea;
+    }
+  }
+}
