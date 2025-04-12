@@ -1,8 +1,7 @@
-import {Link} from "react-router";
+import {NavLink} from "react-router";
 import {useTranslation} from "react-i18next";
 
 const Header = () => {
-
     const {t} = useTranslation()
 
     return (
@@ -11,10 +10,10 @@ const Header = () => {
             <nav className="header__nav">
                 <ul className="header__nav--list">
                     <li className="header__nav--item">
-                        <Link to='/'>{t("Home")}</Link>
+                        <NavLink to='/' className={({isActive}) => isActive? 'active-link': ''}>{t("Home")}</NavLink>
                     </li>
                     <li className="header__nav--item">
-                        <Link to='/char'>{t("Characters")}</Link>
+                        <NavLink to='/char' className={({isActive}) => isActive? 'active-link': ''}>{t("Characters")}</NavLink>
                     </li>
                 </ul>
             </nav>
