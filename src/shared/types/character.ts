@@ -1,13 +1,13 @@
 export interface Character {
-    hair_color: string;
-    skin_color: string;
+    hair_color?: string;
+    skin_color?: string;
     eye_color?: string;
     name?: string;
     height?: string;
     mass?: string;
     birth_year?: string;
     gender?: string;
-    url: string;
+    url?: string;
 }
 
 export type CardProps = {

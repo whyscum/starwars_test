@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import "components/header/Header.less";
+@import "components/pages/home-page/HomePage.less";
+@import "assets/normalize.less";
+@import "assets/constants.less";
+@import "components/pages/char-page/CharPage.less";
+@import "components/pages/error-page/ErrorPage.less";
+@import "components/card/Card.less";
+@import "components/card-list/CardList.less";
+@import "components/popup/CardPopup.less";
+@import "components/filter/FilterCard.less";
+@import "components/loader/Loader";
+
+
+li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+ul {
+  padding: 0
+}
+
+button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+#root {
+  font-family: @font-family-main;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: white;
+  margin: 0;
+  background-image: @background;
+}
+
+.App {
+  width: 100%;
+  max-width: 1440px;
+}

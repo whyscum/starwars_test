@@ -1,21 +1,20 @@
-import Header from "./components/header/Header.tsx";
 import {Route, Routes} from "react-router";
-import MainPage from "./components/pages/main-page/MainPage.tsx";
+import HomePage from "./components/pages/home-page/HomePage.tsx";
 import CharPage from "./components/pages/char-page/CharPage.tsx";
 import ErrorPage from "./components/pages/error-page/ErrorPage.tsx";
+import Layot from "./components/layot/Layot.tsx";
 
 function App() {
 
-  return (
-      <div>
-        <Header />
-          <Routes>
-              <Route path='/' element={<MainPage/>}/>
-              <Route path='/char' element={<CharPage/>}/>
-              <Route path='*' element={<ErrorPage/>}/>
-          </Routes>
-      </div>
-  )
+    return (
+        <Routes>
+            <Route path='/' element={<Layot />}>
+                <Route index element={<HomePage />} />
+                <Route path='char' element={<CharPage />} />
+            </Route>
+            <Route path='*' element={<ErrorPage />} />
+        </Routes>
+    );
 }
 
-export default App
+export default App;
